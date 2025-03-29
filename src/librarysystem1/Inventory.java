@@ -52,7 +52,7 @@ public class Inventory extends javax.swing.JFrame {
                 });
                   
                    String[][] data = books.toArray(new String[0][]);
-                   String[] columns = {"name", "author", "edition", "borrowed"};
+                   String[] columns = {"name", "author", "edition","ISBN","Count", "borrowed"};
                     jTable1.setModel(new javax.swing.table.DefaultTableModel(data, columns));
                 }
         }

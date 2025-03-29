@@ -44,10 +44,10 @@ public class Addmember extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        nmm = new javax.swing.JTextField();
-        idd = new javax.swing.JTextField();
-        cnn = new javax.swing.JTextField();
-        emm = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
+        contact = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         bcc = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -81,12 +81,12 @@ public class Addmember extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 480, 120, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 480, 140, 40));
 
         jLabel4.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("CONTACT NO");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 220, 70));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 250, 70));
 
         jLabel5.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,12 +96,12 @@ public class Addmember extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("BORROWED COUNT");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 310, 70));
-        getContentPane().add(nmm, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 370, -1));
-        getContentPane().add(idd, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 370, -1));
-        getContentPane().add(cnn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 250, 370, -1));
-        getContentPane().add(emm, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 370, -1));
-        getContentPane().add(bcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, 370, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 370, 80));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 380, 40));
+        getContentPane().add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 380, 40));
+        getContentPane().add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, 380, 40));
+        getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 380, 40));
+        getContentPane().add(bcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 380, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarysystem1/pngtree-an-old-bookcase-in-a-library-picture-image_2760144.jpg"))); // NOI18N
         jLabel1.setToolTipText("");
@@ -124,10 +124,10 @@ public class Addmember extends javax.swing.JFrame {
                     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
                     String query="INSERT INTO members(NAME,ID,CONTACTNO,EMAIL,BORROWEDCOUNT) VALUES(?,?,?,?,?)";
                     PreparedStatement ptst=conn.prepareStatement(query);
-                    ptst.setString(1,nmm.getText());
-                    ptst.setString(2,idd.getText());
-                    ptst.setString(3,cnn.getText());
-                    ptst.setString(4,emm.getText());
+                    ptst.setString(1,name.getText());
+                    ptst.setString(2,id.getText());
+                    ptst.setString(3,contact.getText());
+                    ptst.setString(4,email.getText());
                     ptst.setString(5,bcc.getText());
                     ptst.executeUpdate();
                     JOptionPane.showMessageDialog(null,"Data inserted Succesfully");
@@ -177,9 +177,9 @@ public class Addmember extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bcc;
-    private javax.swing.JTextField cnn;
-    private javax.swing.JTextField emm;
-    private javax.swing.JTextField idd;
+    private javax.swing.JTextField contact;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -189,6 +189,6 @@ public class Addmember extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField nmm;
+    private javax.swing.JTextField name;
     // End of variables declaration//GEN-END:variables
 }

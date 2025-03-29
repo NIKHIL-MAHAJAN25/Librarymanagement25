@@ -3,7 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package librarysystem1;
-
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
 /**
  *
  * @author HP
@@ -15,8 +26,38 @@ public class members extends javax.swing.JFrame {
      */
     public members() {
         initComponents();
+        this.fetchmembers();
     }
-
+    public void fetchmembers()
+    {
+        List<String[]>members=new ArrayList<>();
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
+                    String query="SELECT * FROM members";
+                     Statement stmt = conn.createStatement();
+                     ResultSet rs = stmt.executeQuery(query);
+            while(rs.next())
+            {
+                System.out.println(rs);
+                members.add(new String[]
+                {
+                    rs.getString("NAME"),
+                    rs.getString("ID"),
+                    rs.getString("CONTACTNO"),
+                    rs.getString("EMAIL"),
+                    rs.getString("BORROWEDCOUNT"),
+                });
+                String[][] data=members.toArray(new String[0][]);
+                String[] columns={"name", "id", "contact no","email","BorrowedCount"};
+                jTable1.setModel(new javax.swing.table.DefaultTableModel(data, columns));
+            }
+        }
+        catch(Exception e)
+        {
+           JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

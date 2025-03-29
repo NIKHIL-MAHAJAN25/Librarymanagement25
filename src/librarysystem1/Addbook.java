@@ -28,6 +28,7 @@ public class Addbook extends javax.swing.JFrame {
      */
     public Addbook() {
         initComponents();
+        this.setEnabled(true);
     }
 
     /**
@@ -56,6 +57,7 @@ public class Addbook extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setEnabled(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
@@ -66,12 +68,12 @@ public class Addbook extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("AUTHOR");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 130, 50));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 160, 50));
 
         jLabel4.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("COUNT");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 110, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -128,7 +130,8 @@ public class Addbook extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                try{
+                 
+        try{
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
                     String query="INSERT INTO books(NAME,EDITION,ISBN,AUTHOR,COUNT,BORROWED) VALUES(?,?,?,?,?,?)";
