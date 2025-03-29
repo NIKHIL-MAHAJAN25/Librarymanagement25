@@ -51,6 +51,8 @@ public class members extends javax.swing.JFrame {
                 String[][] data=members.toArray(new String[0][]);
                 String[] columns={"name", "id", "contact no","email","BorrowedCount"};
                 jTable1.setModel(new javax.swing.table.DefaultTableModel(data, columns));
+                jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
             }
         }
         catch(Exception e)
@@ -184,6 +186,28 @@ public class members extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+       String searchid = JOptionPane.showInputDialog(this, "Enter ID to Search:");
+if (searchid != null && !searchid.trim().isEmpty()) {
+    boolean found = false;
+    
+    for (int row = 0; row < jTable1.getRowCount(); row++) {
+        String id = jTable1.getValueAt(row, 1).toString().trim(); // Ensure string comparison
+        
+        if (id.equals(searchid.trim())) {
+            jTable1.setRowSelectionInterval(row, row); // Select row
+            jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true)); // Scroll to row
+            found = true;
+            break;
+        }
+    }
+    
+    if (!found) {
+        JOptionPane.showMessageDialog(this, "Member with ID " + searchid + " not found.");
+    }
+} else {
+    JOptionPane.showMessageDialog(this, "Please enter a valid ID.");
+}
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -193,6 +217,8 @@ public class members extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        new deletemembers().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

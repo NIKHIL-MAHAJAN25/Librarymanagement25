@@ -28,6 +28,7 @@ public class Inventory extends javax.swing.JFrame {
         initComponents();
         this.fetchData();
         
+        
     }
     
     public void fetchData(){
@@ -139,14 +140,6 @@ public class Inventory extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("NAME");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("AUTHOR");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("EDITION");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("ISBN");
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("COUNT");
-            jTable1.getColumnModel().getColumn(5).setHeaderValue("BORROWED");
-        }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1200, 640));
 
@@ -183,6 +176,11 @@ public class Inventory extends javax.swing.JFrame {
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 120, 40));
 
         jButton6.setText("SEARCH");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 100, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarysystem1/pngtree-an-old-bookcase-in-a-library-picture-image_2760144.jpg"))); // NOI18N
@@ -233,6 +231,32 @@ public class Inventory extends javax.swing.JFrame {
 //                        Form.setVisible(true);
                     }        // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+         String search = JOptionPane.showInputDialog(this, "Enter ISBN to Search:");
+         if(search!=null && !search.trim().isEmpty())
+         {
+             boolean found=false;
+             for(int row=0;row<jTable1.getRowCount();row++)
+             {
+                 String isbn=jTable1.getValueAt(row,3).toString();
+                 if(isbn.equals(search))
+                 {
+                      jTable1.setRowSelectionInterval(row, row); // Select the matching row
+                jTable1.scrollRectToVisible(jTable1.getCellRect(row, 0, true)); // Scroll to the row
+                found = true;
+                break;
+                 }
+             }
+             if (!found) {
+            JOptionPane.showMessageDialog(this, "Book with ISBN " + search + " not found.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please enter a valid ISBN.");
+             
+         }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
