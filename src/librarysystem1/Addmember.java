@@ -72,7 +72,7 @@ public class Addmember extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 110, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 140, 40));
 
         jButton2.setFont(new java.awt.Font("Rockwell Condensed", 1, 36)); // NOI18N
         jButton2.setText("BACK");

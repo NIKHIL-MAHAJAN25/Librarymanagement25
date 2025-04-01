@@ -53,6 +53,11 @@ public class dashboard1 extends javax.swing.JFrame {
         jButton3.setText("TRANSACTION");
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 740, 160));
 
         jButton4.setFont(new java.awt.Font("Rockwell Condensed", 1, 24)); // NOI18N
@@ -95,6 +100,13 @@ public class dashboard1 extends javax.swing.JFrame {
             new members().setVisible(true);
             this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new Transaction().setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
