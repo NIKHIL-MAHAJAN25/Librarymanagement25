@@ -4,6 +4,12 @@
  */
 package librarysystem1;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
@@ -16,6 +22,7 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         this.getRootPane().setDefaultButton(jButton1);
+        this.setResizable(false);
     }
 
     /**
@@ -27,7 +34,6 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
@@ -35,19 +41,15 @@ public class login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Rockwell Condensed", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("LOGIN ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 170, 70));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("ADMIN ID");
+        jLabel2.setText("ISE ADMIN ID");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 200, 110));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -71,8 +73,8 @@ public class login extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Rockwell Condensed", 1, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("LIBRARY MANAGEMENT SYSTEM");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 670, 70));
+        jLabel4.setText("ISE LIBRARY MANAGEMENT SYSTEM");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 920, 130));
 
         jButton1.setFont(new java.awt.Font("Rockwell Condensed", 1, 24)); // NOI18N
         jButton1.setText("LOGIN");
@@ -92,6 +94,10 @@ public class login extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 420, 110, 60));
 
+        jButton3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jButton3.setText("ADD ISE ADMIN");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 520, 240, 70));
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarysystem1/backg.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 670));
@@ -108,18 +114,37 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                String username=jTextField1.getText();
-                String password=new String(jPasswordField1.getPassword());
-                 if ("admin".equals(username) && "admin123".equals(password)) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Login Successful!");
-
+                        String Id=jTextField1.getText();
+                     String password=jPasswordField1.getText();
+                     if(Id.equals("") || password.equals("")){
+                    JOptionPane.showMessageDialog(null, "Please enter both Admin ID and Password.");
+                       return;
+                        }
+                       
+                try{
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
+                    String query="SELECT * FROM login WHERE ID='"+Id+"' AND PASSWORD='"+password+"'";
+                     Statement stmt = conn.createStatement();
+                     ResultSet rs = stmt.executeQuery(query);
+                      if(rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Login Successful!");
+                        new dashboard1().setVisible(true);
+                        this.dispose();
+                      }
+                      else{
+                          JOptionPane.showMessageDialog(null,"Invalid Admin ID or password");
+                      }  
+                     
+                    
+                    }
+                     
+                catch(Exception e){
+                    JOptionPane.showMessageDialog(null,e);
+              }
         
-        new dashboard1().setVisible(true);
-        this.dispose(); // Close the login window
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Invalid Username or Password", 
-            "Login Failed", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+        
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -164,7 +189,7 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
