@@ -4,6 +4,14 @@
  */
 package librarysystem1;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+
+
 /**
  *
  * @author HP
@@ -60,20 +68,26 @@ public class Issue extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("RETURN DATE");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
-
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setText("jTextField1");
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 310, 40));
-
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("jTextField2");
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 310, 40));
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 510, -1, -1));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton1.setText("ISSUE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 480, 120, -1));
 
-        jButton2.setText("jButton2");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, -1));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton2.setText("BACK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 480, -1, -1));
 
         jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 310, 40));
@@ -86,6 +100,64 @@ public class Issue extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+             Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/library","root","");
+              String checkQuery = "SELECT * FROM Transactions WHERE ID = ? AND STATUS = 'Issued'";
+            PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+            checkStmt.setString(1, jTextField1.getText());
+            ResultSet rs = checkStmt.executeQuery();
+    if (rs.next()) {
+        // Member already has an issued book
+        JOptionPane.showMessageDialog(null, "This member already has a book issued. Return it before issuing a new one.");
+    }
+             else{
+             String query="INSERT INTO Transactions (ID, ISBN, ISSUE_DATE,DUE_DATE,STATUS) VALUES (?, ?, ?, ?, ?)";
+             PreparedStatement ptst=conn.prepareStatement(query);
+             //
+             java.util.Date utilDate = jDateChooser1.getDate();
+                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                 java.util.Date utilDate1 = jDateChooser2.getDate();
+                java.sql.Date sqlDate2 = new java.sql.Date(utilDate1.getTime());
+                //
+             ptst.setString(1,jTextField1.getText());
+                    ptst.setString(2,jTextField2.getText());
+                    ptst.setDate(3,sqlDate);
+                    ptst.setDate(4,sqlDate2);
+                    ptst.setString(5,"Issued");
+                    ptst.executeUpdate();
+                     // Decrease book count by 1
+        
+         String updateBookBorrowed = "UPDATE books SET BORROWED = BORROWED + 1 WHERE ISBN = ?";
+        PreparedStatement pstBookBorrowed = conn.prepareStatement(updateBookBorrowed);
+        pstBookBorrowed.setString(1, jTextField2.getText());
+        pstBookBorrowed.executeUpdate();
+
+        // Increase member's borrowed count by 1
+        String updateMember = "UPDATE members SET BORROWEDCOUNT = BORROWEDCOUNT + 1 WHERE ID = ?";
+        PreparedStatement pstMember = conn.prepareStatement(updateMember);
+        pstMember.setString(1, jTextField1.getText());
+        pstMember.executeUpdate();
+                    JOptionPane.showMessageDialog(null,"Data inserted succesfully");
+                    ptst.close();
+                    conn.close();
+                    
+             
+             
+                     }
+        }catch(ClassNotFoundException | SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Transaction().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

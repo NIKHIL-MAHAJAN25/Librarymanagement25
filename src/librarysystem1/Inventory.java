@@ -48,7 +48,8 @@ public class Inventory extends javax.swing.JFrame {
                     rs.getString("AUTHOR"),
                     rs.getString("EDITION"),
                     rs.getString("ISBN"),
-                    rs.getString("BORROWED"),
+                    rs.getString("COUNT"),
+                    rs.getString("BORROWED")
                    
                 });
                   

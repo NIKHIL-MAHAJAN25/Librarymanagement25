@@ -65,12 +65,17 @@ public class dashboard1 extends javax.swing.JFrame {
         jButton4.setText("STATISTICS");
         jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 460, 740, 200));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("LIBRARY MANAGEMENT");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, 300, 50));
+        jLabel2.setText("ISE LIBRARY MANAGEMENT");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, 330, 50));
 
         jButton5.setFont(new java.awt.Font("Rockwell Condensed", 1, 24)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarysystem1/Untitled design (7).png"))); // NOI18N
@@ -107,6 +112,12 @@ public class dashboard1 extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        new Stats().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

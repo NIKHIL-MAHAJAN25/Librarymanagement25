@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nikhi/OneDrive/Desktop/Librarymanagement25/src/librarysystem1/login.java</file>
-            <file>file:/C:/Users/nikhi/OneDrive/Desktop/Librarymanagement25/src/librarysystem1/dashboard1.java</file>
-            <file>file:/C:/Users/nikhi/OneDrive/Desktop/Librarymanagement25/src/librarysystem1/Transaction.java</file>
-            <file>file:/C:/Users/nikhi/OneDrive/Desktop/Librarymanagement25/src/librarysystem1/statistics.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/login.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Bookstats.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Inventory.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Memberstats.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Addbook.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Return.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Stats.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Issue.java</file>
+            <file>file:/C:/Users/nikhi/OneDrive/Documents/NetBeansProjects/Librarymanagement25/src/librarysystem1/Transaction.java</file>
         </group>
     </open-files>
 </project-private>
